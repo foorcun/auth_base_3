@@ -1,4 +1,5 @@
 import 'package:auth_base_3/core/error/failure.dart';
+import 'package:auth_base_3/core/error/success.dart';
 import 'package:auth_base_3/core/singlelar/singlelar.dart';
 import 'package:auth_base_3/features/user/domain/entities/BenimUser.dart';
 import 'package:dartz/dartz.dart';
@@ -13,7 +14,7 @@ abstract class AuthStrateji {
 
   // Future<UserCredential> signIn();
 
-  Future<Either<Failure, BenimUser>> signIn();
+  Future<Either<Failure, BenimUser>> signIn(AuthStrateji authStrateji);
 
   // Future<UserCredential> signInAnonymously() async {
   //   final userC = await _firebaseAuth.signInAnonymously();
@@ -44,11 +45,13 @@ abstract class AuthStrateji {
   //   return userC;
   // }
 
-  Future<void> signOut() async {
-    await firebaseAuth.signOut();
+  // Future<void> signOut() async {
+  //   // await firebaseAuth.signOut();
 
-    // await GoogleSignIn().signOut();
-  }
+  //   // await GoogleSignIn().signOut();
+  // }
+
+  Future<Either<Failure, Success>> signOut();
 
   Future<Map<String, dynamic>?> girisSayisi(
       UserCredential girilenUserCredential) async {

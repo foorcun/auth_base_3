@@ -5,7 +5,6 @@
     ".dart_tool": true,
     ".idea": true,
     ".vscode": true,
-    "android": true,
     "build": true,
     "ios": true,
     "linux": true,

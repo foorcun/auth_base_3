@@ -1,4 +1,5 @@
 import 'package:auth_base_3/core/error/failure.dart';
+import 'package:auth_base_3/core/error/success.dart';
 import 'package:auth_base_3/features/user/data/datasource/auth_strateji.dart';
 import 'package:auth_base_3/features/user/domain/entities/BenimUser.dart';
 import 'package:dartz/dartz.dart';
@@ -20,9 +21,20 @@ class AuthGoogleSingInStrateji extends AuthStrateji {
   // }
 
   @override
-  Future<void> signOut() async {
+  Future<Either<Failure, Success>> signOut() async {
     // TODO: implement signOut
-    await firebaseAuth.signOut();
+
+    try {
+      await firebaseAuth
+          .signOut()
+          .then((value) => print("firebase  user signed out.."));
+      await GoogleSignIn()
+          .signOut()
+          .then((value) => print("google use signed out"));
+      return Right(SignOutSuccess());
+    } catch (e) {
+      return Left(SignOutFailure());
+    }
   }
 
   // @override
@@ -52,11 +64,12 @@ class AuthGoogleSingInStrateji extends AuthStrateji {
   // }
 
   @override
-  Future<Either<Failure, BenimUser>> signIn() async {
+  Future<Either<Failure, BenimUser>> signIn(AuthStrateji authStrateji) async {
     // ignore: avoid_print
     print("Future<UserCredential> signIn()");
 
     try {
+      //Google sign in kismi
       // Trigger the authentication flow
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
@@ -72,12 +85,16 @@ class AuthGoogleSingInStrateji extends AuthStrateji {
         idToken: googleAuth?.idToken,
       );
 
+      // firebase sign in kismi
       // Once signed in, return the UserCredential
       var userCred =
           await FirebaseAuth.instance.signInWithCredential(credential);
       // print('userCred ' + userCred.toString());
 
-      return Right(BenimUser.withCredential(userCred));
+      // create BenimUser
+      var newUser = BenimUser.withCredential(userCred);
+      newUser.authStrateji = authStrateji;
+      return Right(newUser);
       // return Right(BenimUser());
     } catch (e) {
       return Left(GeneralSignInFailure());

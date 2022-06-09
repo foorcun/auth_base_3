@@ -18,6 +18,8 @@ class ServerFailure extends Failure {
 
 class GeneralSignInFailure extends Failure {}
 
+class SignOutFailure extends Failure {}
+
 class DataNotFoundFailure extends Failure {}
 
 class CacheFailure extends Failure {}

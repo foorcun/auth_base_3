@@ -1,6 +1,7 @@
 import 'package:auth_base_3/features/user/data/repository/user_repository_impl.dart';
 import 'package:auth_base_3/features/user/domain/repositories/user_repository.dart';
 import 'package:auth_base_3/features/user/domain/usecases/sign_in_user_usecase.dart';
+import 'package:auth_base_3/features/user/domain/usecases/sign_out_user_usecase.dart';
 import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
@@ -9,6 +10,7 @@ Future<void> init() async {
   //! Features - Number Trivia
   //! dizi use case
   sl.registerLazySingleton(() => SignInUserUsecase(repository: sl()));
+  sl.registerLazySingleton(() => SignOutUserUsecase(repository: sl()));
   // sl.registerLazySingleton(() => AddDiziUsecase(diziRepository: sl()));
   // sl.registerLazySingleton(() => DeleteDiziByIdUsecase(diziRepository: sl()));
   // sl.registerLazySingleton(() => DiziUpdatePatchUsecase(diziRepository: sl()));

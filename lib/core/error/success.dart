@@ -8,3 +8,5 @@ abstract class Success extends Equatable {
 
 // General successes
 class SignInSuccess extends Success {}
+
+class SignOutSuccess extends Success {}

@@ -1,4 +1,5 @@
 import 'package:auth_base_3/features/user/presentation/state_management/user_controller.dart';
+import 'package:auth_base_3/features/user/presentation/widget/sign_out_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -23,7 +24,8 @@ class HomePage extends StatelessWidget {
                     .userCredential!
                     .user!
                     .email!)
-                : Text("uid null")
+                : Text("uid null"),
+            SignOutButton()
           ],
         ),
       ),
