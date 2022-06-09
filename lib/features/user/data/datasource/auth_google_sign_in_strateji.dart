@@ -73,11 +73,12 @@ class AuthGoogleSingInStrateji extends AuthStrateji {
       );
 
       // Once signed in, return the UserCredential
-      // var userCred =
-      //     await FirebaseAuth.instance.signInWithCredential(credential);
+      var userCred =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+      print('userCred ' + userCred.toString());
 
-      // return Right(BenimUser.withCredential(userCred));
-      return Right(BenimUser());
+      return Right(BenimUser.withCredential(userCred));
+      // return Right(BenimUser());
     } catch (e) {
       return Left(GeneralSignInFailure());
     }
