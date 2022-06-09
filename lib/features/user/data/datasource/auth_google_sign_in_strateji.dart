@@ -65,7 +65,7 @@ class AuthGoogleSingInStrateji extends AuthStrateji {
       // Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth =
           await googleUser?.authentication;
-      print("GoogleSignInAuthentication " + googleAuth.toString());
+      // print("GoogleSignInAuthentication " + googleAuth.toString());
       // Create a new credential
       final OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -75,7 +75,7 @@ class AuthGoogleSingInStrateji extends AuthStrateji {
       // Once signed in, return the UserCredential
       var userCred =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      print('userCred ' + userCred.toString());
+      // print('userCred ' + userCred.toString());
 
       return Right(BenimUser.withCredential(userCred));
       // return Right(BenimUser());

@@ -1,10 +1,11 @@
-import 'package:auth_base_3/features/user/data/datasource/auth_strateji.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
+import 'package:auth_base_3/features/user/data/datasource/auth_strateji.dart';
+
 // class BenimUser extends User {
 class BenimUser {
-  Rx<User?>? user;
+  // User? user;
   AuthStrateji? authStrateji;
 
   UserCredential? userCredential;
@@ -15,8 +16,8 @@ class BenimUser {
 
   BenimUser();
 
-  BenimUser.withCredential(UserCredential userCredential) {
-    userCredential = userCredential;
+  BenimUser.withCredential(UserCredential userCred) {
+    userCredential = userCred;
   }
 
   BenimUser.withAuthStrateji(AuthStrateji authStrateji) {
@@ -52,4 +53,8 @@ class BenimUser {
   setAuthStrateji(AuthStrateji authStrateji) {
     this.authStrateji = authStrateji;
   }
+
+  @override
+  String toString() =>
+      'BenimUser( authStrateji: $authStrateji, userCredential: $userCredential)';
 }

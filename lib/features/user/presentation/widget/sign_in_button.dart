@@ -1,5 +1,7 @@
 import 'package:auth_base_3/features/user/data/datasource/auth_google_sign_in_strateji.dart';
 import 'package:auth_base_3/features/user/presentation/state_management/user_controller.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_signin_button/button_list.dart';
@@ -19,6 +21,14 @@ class SignInButtonum extends StatelessWidget {
         var response =
             await Get.find<UserController>().signIn(AuthGoogleSingInStrateji());
         print(response);
+        response.fold(
+            (l) => null,
+            (r) => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          Get.find<UserController>().homePage),
+                ));
         // await userController.myUser.value
         //     .setAuthStrateji(AuthGoogleSingInStrateji());
         // print(userController.myUser.value.authStrateji.toString());

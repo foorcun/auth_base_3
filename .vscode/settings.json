@@ -10,6 +10,12 @@
     "ios": true,
     "linux": true,
     "macos": true,
-    ".flutter-plugins": true
+    ".flutter-plugins": true,
+    ".gitignore": true,
+    ".metadata": true,
+    ".packages": true,
+    "test": true,
+    ".flutter-plugins-dependencies": true,
+    "analysis_options.yaml": true
   }
 }
