@@ -1,0 +1,12 @@
+{
+  "files.exclude": {
+    "web": true,
+    "windows": true,
+    ".dart_tool": true,
+    ".idea": true,
+    ".vscode": true,
+    "android": true,
+    "build": true,
+    "ios": true
+  }
+}
