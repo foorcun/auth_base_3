@@ -1,12 +1,19 @@
+import 'package:auth_base_3/core/error/failure.dart';
 import 'package:auth_base_3/core/singlelar/singlelar.dart';
+import 'package:auth_base_3/features/user/domain/entities/BenimUser.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthStrateji {
   final firebaseAuth = FirebaseAuth.instance;
 
-  Future<UserCredential> signIn() async {
-    throw UnimplementedError();
-  }
+  // Future<UserCredential> signIn() async {
+  //   throw UnimplementedError();
+  // }
+
+  // Future<UserCredential> signIn();
+
+  Future<Either<Failure, BenimUser>> signIn();
 
   // Future<UserCredential> signInAnonymously() async {
   //   final userC = await _firebaseAuth.signInAnonymously();

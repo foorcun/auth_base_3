@@ -16,6 +16,8 @@ class ServerFailure extends Failure {
   }) : super(failureMessage: failureMessage);
 }
 
+class GeneralSignInFailure extends Failure {}
+
 class DataNotFoundFailure extends Failure {}
 
 class CacheFailure extends Failure {}

@@ -1,4 +1,7 @@
+import 'package:auth_base_3/core/error/failure.dart';
 import 'package:auth_base_3/features/user/data/datasource/auth_strateji.dart';
+import 'package:auth_base_3/features/user/domain/entities/BenimUser.dart';
+import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -49,24 +52,34 @@ class AuthGoogleSingInStrateji extends AuthStrateji {
   // }
 
   @override
-  Future<UserCredential> signIn() async {
+  Future<Either<Failure, BenimUser>> signIn() async {
     // ignore: avoid_print
     print("Future<UserCredential> signIn()");
 
-    // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    try {
+      // Trigger the authentication flow
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
-    // Obtain the auth details from the request
-    final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+      print(googleUser);
 
-    // Create a new credential
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+      // Obtain the auth details from the request
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+      print("GoogleSignInAuthentication " + googleAuth.toString());
+      // Create a new credential
+      final OAuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
 
-    // Once signed in, return the UserCredential
-    return await FirebaseAuth.instance.signInWithCredential(credential);
+      // Once signed in, return the UserCredential
+      // var userCred =
+      //     await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // return Right(BenimUser.withCredential(userCred));
+      return Right(BenimUser());
+    } catch (e) {
+      return Left(GeneralSignInFailure());
+    }
   }
 }

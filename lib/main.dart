@@ -1,11 +1,18 @@
+import 'package:auth_base_3/features/user/presentation/plain/plain_sign_in.dart';
+import 'package:auth_base_3/features/user/presentation/state_management/all_dizi_bindings.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'injection_container.dart' as di;
 
 bool USE_FIRESTORE_EMULATOR = false;
 final firestoreManager = FirebaseFirestore.instance;
 
 Future<void> main() async {
+  await di.init();
+  AllUserBindings().dependencies();
+
   WidgetsFlutterBinding.ensureInitialized();
   // await Firebase.initializeApp();
   if (USE_FIRESTORE_EMULATOR) {
@@ -33,22 +40,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Scaffold(
-        body: Center(
-          child: Text("${colRef.id}"),
-        ),
-      ),
+      // home: Scaffold(
+      //   body: Center(
+      //     child: Text("${colRef.id}"),
+      //   ),
+      // ),
+      home: PlainSignIn(),
     );
   }
 }

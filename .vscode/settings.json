@@ -7,6 +7,9 @@
     ".vscode": true,
     "android": true,
     "build": true,
-    "ios": true
+    "ios": true,
+    "linux": true,
+    "macos": true,
+    ".flutter-plugins": true
   }
 }

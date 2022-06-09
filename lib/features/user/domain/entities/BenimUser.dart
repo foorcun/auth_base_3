@@ -23,9 +23,9 @@ class BenimUser {
     this.authStrateji = authStrateji;
   }
 
-  userSignIn() async {
-    userCredential = await authStrateji!.signIn();
-  }
+  // userSignIn() async {
+  //   userCredential = await authStrateji!.signIn();
+  // }
 
   // bringThisUser() {
   //   return this;
